@@ -1,0 +1,21 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1>Search Results</h1>
+    These are some of the entries that are partial matches:
+
+    <ul>
+        {{ alert_ }}
+        {% for close_match in close_matches %}
+        <li>
+            <a href="wiki/{{ close_match }}">{{ close_match }}</a>
+        </li>
+        {% endfor %}
+    </ul>    
+
+
+{% endblock %}

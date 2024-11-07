@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        
         <title>Search</title>
     </head>
     <body>
-        <form action="https://google.com/search">
-            <input type="text" name="q">
-            <input type="submit" value="Google Search">
-        </form>
+        <nav>
+            <div class = "topnav-right">
+                <a href="/search/image.html">Image Search</a>
+                <a href="/search/advanced.html">Advanced Search</a>
+        </div>
+        </nav>
+        <div class="core">
+            <form action="https://google.com/search">
+
+                <input type="text" name="q">
+                <br>
+                <input type="submit"  class="btn" value="Google Search">
+                <input type="submit" name="btnI" class="btn" value="I'm Feeling Lucky">
+            </form>
+        </div>
     </body>
 </html>
+<!--
+[How to use div to layout a nav bar, two column div and a bottom div]
+(https://stackoverflow.com/questions/62051806/how-to-use-div-to-layout-a-nav-bar-two-column-div-and-a-bottom-div)
+-->

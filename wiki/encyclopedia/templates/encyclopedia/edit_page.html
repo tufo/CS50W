@@ -1,0 +1,24 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1>Edit Page</h1>
+
+    You are currently editing:
+    <h3>{{editor_title}}</h3>
+
+    <form action="{% url 'submit_update' %}" method="POST">
+        {% csrf_token %}
+        <textarea name="new_body">
+{{ md_body }}
+        </textarea>
+        <br>
+        <input type="hidden" name="updating_title" value={{editor_title}}>
+        <input type="submit" value="Update">
+    </form>
+    
+
+{% endblock %}

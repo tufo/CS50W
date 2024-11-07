@@ -1,0 +1,21 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1>Create A Page</h1>
+
+    On this page, you can create a new wiki page by submitting content in markdown text format.
+    <br>
+    <form action="{% url 'create_page' %}" method="POST">
+        {% csrf_token %}
+        <input class="" type="text" name="new_title" placeholder="Enter title." value="NEW_TITLE">
+        <br><br>
+        <textarea name="new_body">Enter body text here.</textarea>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+{% endblock %}
