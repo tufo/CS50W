@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Animation</title>
+        <style>
+
+            @keyframes move {
+                /* at key frame: beginning, */
+                0% {
+                    /* you should be 0% from the left */
+                    left: 0%;
+                }
+                /* at key frame: halfway */
+                50% {
+                    /* you should be 50% from the left */                 
+                    left: 50%;
+                }
+                /* at key frame: ending */
+                100% {
+                    /* you should be 0% from the left */                    
+                    left: 0%;
+                }
+            }
+
+            h1 {
+                position: relative;
+                animation-name: move;
+                animation-duration: 3s;
+                animation-fill-mode: forwards;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>Welcome!</h1>
+    </body>
+</html>

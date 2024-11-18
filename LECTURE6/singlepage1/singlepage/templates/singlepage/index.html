@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Single Page</title>
+        <style>
+        </style>
+        <script>
+            
+            // write function that shows or hides a section
+            function showSection(section) {
+                
+                // use asynchronous JS to fetch what text to display from my own web server.
+                fetch(`/sections/${section}`)
+
+                // convert response into plain text using .text()
+                .then(response => response.text())
+
+                // take the text
+                .then(text => {
+
+                    // print the text to the console.
+                    console.log(text);
+
+                    // find the content using the id #content of the page and update its inner HTML.
+                    // set it equal to that text.
+                    document.querySelector('#content').innerHTML = text;
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('button').forEach(button => {
+                    button.onclick = function() {
+                        showSection(this.dataset.section);
+                    };
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Hello!</h1>
+        <button data-section="1">Section 1</button>
+        <button data-section="2">Section 2</button>
+        <button data-section="3">Section 3</button>
+        <div id="content">
+            <!-- this div is initially blank, but will be filled by the JS. -->
+        </div>
+    </body>
+</html>

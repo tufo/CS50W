@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hello</title>
+        <script>
+
+            // once the form is submited, 
+            document.addEventListener('DOMContentLoaded', function(){
+
+
+                // get me the element that is a form.
+                // if it is submitted, run function (after equal sign)
+                document.querySelector('form').onsubmit = function() {
+                    // get the element (input field) that has the id of name, specifically.
+                    // be careful when there are more than 1 input.
+                    // grab the value using the ".value" property.
+                    // assign it to a constant variable called "name".
+                    const name = document.querySelector('#name').value;
+
+                    alert(`Hello, ${name}!`);
+                };
+            });
+
+            /* function hello(){
+                let heading = document.querySelector('h1');
+                if (heading.innerHTML === 'Hello!') {
+                    heading.innerHTML = 'Goodbye!';
+                } else { // if it's 'Goodbye!'
+                    heading.innerHTML = 'Hello!';
+                }
+            } */
+        </script>
+    </head>
+    <body>
+        <h1>Hello!</h1>
+        <form>
+            <!-- <button onclick="hello()">Click Here</button> -->
+            
+            <input autofocus id="name" placeholder="Name" type="text">
+            <input type="submit">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Currency Exchange</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+
+                // do something only when the form is submitted.
+                document.querySelector('form').onsubmit = function() {
+
+                    // get the exchange rate from this API URL.
+                    // fetch('https://api.exchangeratesapi.io/latest?base=USD')
+                    
+                    fetch('exchange_rates.json')
+
+                    /* Demo for AJAX
+                    // fetch gets back a "promise"
+                    // a response will come back, but not immediately.
+                    // what should i do when the "promise" comes back?
+                    // this is an asychronous process; it may take some time.
+
+                    .then(response => {
+                        // convert the response into JSON so that i can use it to access the exchange rates.
+                        return response.json()
+                    })
+                    */
+
+                    
+                    // shorthand of the above script to convert into JSON
+                    .then(response => response.json())
+
+                    
+                    // once you have that data, here's what i want you to do with that data.
+                    .then(data => {
+
+                        console.log(data); // print out that data.
+
+                        // figure out what the user typed into the input field.
+                        const currency = document.querySelector('#currency').value.toUpperCase();
+
+                        // const rate = data.rates.EUR;
+                        const rate = data.rates[currency]; // currency here is the variable defined in the lines above, access in this way is allowed via the square brackets.
+
+                        // if a property or value does not exist, JS will returned "undefined"
+                        if (rate !== undefined) { // if found.
+
+                            // write the result to the result id on the webpage
+                            // round to 3 decimal places.
+                            document.querySelector('#result').innerHTML = `1 USD = ${rate.toFixed(3)} ${currency}.`;
+
+                        } else { // if "undefined"
+                            document.querySelector('#result').innerHTML = 'Invalid currency.';
+                        }
+                    })
+
+                    // this will report the error message if there was an issue with the fetch.
+                    .catch(error => {
+                        console.log('Error:', error);
+                    });
+
+                    return false; // 
+                }
+            });
+
+        </script>
+    </head>
+    <body>
+        <form>
+            <input id="currency" placeholder="Currency" type="text">
+            <input type="submit" value="Convert">
+        </form>
+
+        <div id="result">
+
+        </div>
+    </body>
+</html>

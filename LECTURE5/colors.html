@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Colors</title>
+        <script>
+            // Add an event listener to the document.
+            // When the content is done loading, run the function.
+            document.addEventListener('DOMContentLoaded', () => {
+                
+                /* // Demo 1
+                // Change font color to red.
+                document.querySelector('#red').onclick = function(){
+                    document.querySelector('#hello').style.color = 'red';
+                }
+                
+                // Change font color to blue.
+                document.querySelector('#blue').onclick = function(){
+                    document.querySelector('#hello').style.color = 'blue';
+                }
+                
+                // Change font color to green.
+                document.querySelector('#green').onclick = function(){
+                    document.querySelector('#hello').style.color = 'green';
+                }
+                */
+
+                /* // Demo 2
+                // Look for all of the buttons;
+                // then, **for each** of those buttons, 
+                // run a **function** on each of those buttons.
+                document.querySelectorAll('button').forEach(button => {
+                    // what is that function? it's this one that takes as input, each of the buttons, adds an onclick handler to the button;
+                    // then, runs this next function.
+                    button.onclick = function() {
+                        // get the hello element,
+                        // change its style; within its style, change its color to `button.dataset.color`
+                        document.querySelector('#hello').style.color = button.dataset.color;
+                    }
+                });
+                */
+
+
+                // Demo 3
+                document.querySelector('select').onchange = function() {
+                    document.querySelector('#hello').style.color = this.value;
+               }
+            });
+
+        </script>
+    </head>
+    <body>
+        <h1 id="hello">Hello!</h1>
+            
+        <!-- Demo 2
+        <button data-color="red">Red</button>
+        <button data-color="blue">Blue</button>
+        <button data-color="green">Green</button>
+        -->
+        
+        <!-- Demo 3 -->
+        <select>
+            <option value="black">Black</option>
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+        </select>
+
+    </body>
+</html>

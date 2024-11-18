@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Tasks</title>
+        <script>
+            // Only after DOM content is loaded, run the function.
+            document.addEventListener('DOMContentLoaded', function() {
+
+                // By default, the submit button should be disabled.
+                document.querySelector('#submit').disabled = true;
+
+                // submit button will be enabled upon the first onkeyup.
+                // add if statement to toggle enable/disable if input field was cleared via backspacing.
+                document.querySelector('#task').onkeyup = () => {
+                    //
+                    if (document.querySelector('#task').value.length > 0) {
+                        document.querySelector('#submit').disabled = false;
+                    } else {
+                        document.querySelector('#submit').disabled = true;
+                    }
+                }
+
+                // When the form is submitted, run the function.
+                document.querySelector('form').onsubmit = () => {
+                
+                    // Function figures out what the user typed in.
+                    // get the element of id task.
+                    // get the actual value
+                    // save it as variable task
+                    const task = document.querySelector('#task').value;
+
+                    // print out the result into the javascript console.
+                    console.log(task);
+
+                    // create a new element
+                    const li = document.createElement('li');
+                    li.innerHTML = task;
+
+                    // get me the unordered list with id tasks.
+                    // once i have that element, append item "li" to the end of the ul.
+                    document.querySelector('#tasks').append(li);
+                    
+                    // after submit, clear out the value in the input field after submit.
+                    document.querySelector('#task').value = '';
+
+                    // after submit, disable the submit button again.
+                    document.querySelector('#submit').disabled = true;
+
+                    // Stop form from submitting. everything will be done client-side.
+                    return false;
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <h1>Tasks</h1>
+
+        <ul id="tasks">
+
+        </ul>
+
+        <form>
+            <input id="task" placeholder="NewTask" type="text">
+            <input id="submit" type="submit">
+        </form>
+    </body>
+</html>

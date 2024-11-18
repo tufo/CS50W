@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Currency Exchange</title>
+
+        <script>
+
+            // this version of the HTML file loads the JSON data directly into the JS script, rather than fetching it from the API.
+            // all the API-related code has been commented.
+
+            let data={"rates": {"CAD":1.3278196855,"HKD":7.7633372717,"ISK":125.5112242116,"PHP":50.7288921203,"DKK":6.7913296374,"HUF":306.0619830955,"CZK":22.6238298646,"GBP":0.7710169954,"RON":4.3310915205,"SEK":9.5928383168,"IDR":13633.3818049623,"INR":71.1483231846,"BRL":4.2309370172,"RUB":63.1259656457,"HRK":6.7766063801,"JPY":109.851858584,"THB":31.0797055349,"CHF":0.9738253204,"EUR":0.9088430428,"MYR":4.1215123148,"BGN":1.7775152231,"TRY":5.9880032718,"CNY":6.968644915,"NOK":9.205489412,"NZD":1.5444878669,"ZAR":14.8166863583,"USD":1.0,"MXN":18.6178315005,"SGD":1.3844406071,"AUD":1.4797782423,"ILS":3.4327001727,"KRW":1183.1136962647,"PLN":3.858129601},"base":"USD","date":"2020-02-06"};
+
+            document.addEventListener('DOMContentLoaded', function() {
+
+                // do something only when the form is submitted.
+                document.querySelector('form').onsubmit = function() {
+
+                    // get the exchange rate from this API URL.
+                    // fetch('https://api.exchangeratesapi.io/latest?base=USD')
+                    
+                    // fetch('exchange_rates.json')
+
+                    /* Demo for AJAX
+                    // fetch gets back a "promise"
+                    // a response will come back, but not immediately.
+                    // what should i do when the "promise" comes back?
+                    // this is an asychronous process; it may take some time.
+
+                    .then(response => {
+                        // convert the response into JSON so that i can use it to access the exchange rates.
+                        return response.json()
+                    })
+                    */
+
+                    // shorthand of the above script to convert into JSON
+                    // .then(response => response.json())
+
+                    
+                    // once you have that data, here's what i want you to do with that data.
+                    //.then(data => {
+                    //data => {
+
+                        console.log(data); // print out that data.
+
+                        // figure out what the user typed into the input field.
+                        const currency = document.querySelector('#currency').value.toUpperCase();
+
+                        // const rate = data.rates.EUR;
+                        const rate = data.rates[currency]; // currency here is the variable defined in the lines above, access in this way is allowed via the square brackets.
+
+                        // if a property or value does not exist, JS will returned "undefined"
+                        if (rate !== undefined) { // if found.
+
+                            // write the result to the result id on the webpage
+                            // round to 3 decimal places.
+                            document.querySelector('#result').innerHTML = `1 USD = ${rate.toFixed(3)} ${currency}.`;
+
+                        } else { // if "undefined"
+                            document.querySelector('#result').innerHTML = 'Invalid currency.';
+                        //}
+                    //})
+                    }
+
+                    // this will report the error message if there was an issue with the fetch.
+                    /*.catch(error => {
+                        console.log('Error:', error);
+                    });*/
+
+                    return false; // 
+                }
+            });
+
+        </script>
+    </head>
+    <body>
+        <form>
+            <input id="currency" placeholder="Currency" type="text">
+            <input type="submit" value="Convert">
+        </form>
+
+        <div id="result">
+
+        </div>
+    </body>
+</html>

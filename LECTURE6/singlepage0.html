@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Single Page</title>
+    <style>
+        div {
+            /* hide all divs by default  */
+            display: none;
+        }
+    </style>
+    <script>
+        // write function to show a specific page.
+        function showPage(page) {
+
+            // hide all the (other) pages.
+            document.querySelectorAll('div').forEach(div => {
+                div.style.display = 'none';
+            })
+            // 'block' means to show
+            document.querySelector(`#${page}`).style.display = 'block';
+        }
+        
+        // wait until buttons have loaded onto the page.
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // only then can we select all of the buttons.
+            document.querySelectorAll('button').forEach(button => {
+
+                // for each of those buttons, attach an event listener for when the button is clicked.
+                button.onclick = function() {
+                
+                    // when clicked, we want to show whatever page is within the "page part of the "data-page" dataset.
+                    // then call the showPage function.
+                    showPage(this.dataset.page);
+                }
+            });
+        });
+
+    </script>
+
+    </head>
+    <body>
+        <button data-page="page1">Page 1</button>
+        <button data-page="page2">Page 2</button>
+        <button data-page="page3">Page 3</button>
+        <div id="page1">
+            <h1>This is page 1.</h1>
+        </div>
+        <div id="page2">
+            <h1>This is page 2.</h1>
+        </div>
+        <div id="page3">
+            <h1>This is page 3.</h1>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Webpage</title>
+        <style>
+            /* key frames for animation 1 (fadeaway) and animation 2 (height shrink) */
+            @keyframes hide {
+                0% {
+                    height: 100%;
+                    line-height: 100%;
+                    padding: 20px;
+                    margin-bottom: 10px;
+                }
+                75% {
+                    opacity: 0;; /* fadeaway end state */
+                    height: 100%; /* height shrink start state */
+                    line-height: 100%;
+                    padding: 20px;
+                    margin-bottom: 10px;
+                }
+                /* from 75% to 100%, execute the animation for  */
+                100% {
+                    opacity: 0;
+                    height: 0px; /* height shrink end state */
+                    line-height: 0px;
+                    padding: 0px;
+                    margin-bottom: 0px;
+                }
+            }
+
+            .hide  {
+                float: right;
+            }
+
+            .post {
+                background-color: #77dd11;
+                padding: 20px;
+                margin-bottom: 10px;
+                animation-name: hide;
+                animation-duration: 2s;
+                animation-fill-mode: forwards;
+                /* initial play state will be paused. */
+                animation-play-state: paused;
+            }
+
+            body {
+                padding-bottom: 50px;
+            }
+
+        </style>
+        <script>
+
+            // Start with first post
+            let counter = 1;
+
+            // Load posts 20 at a time
+            const quantity = 20;
+
+            // When DOM loads, render the first 20 posts
+            document.addEventListener('DOMContentLoaded', load);
+
+            // If scrolled to bottom, load the next 20 posts
+            window.onscroll = () => {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                    load();
+                }
+            };
+
+
+            // How to implement hide?
+            // If hide button is clicked, delete the post
+            // listen for anytime anyone clicks on the document...
+            document.addEventListener('click', event => {
+
+                // we can get access to the "event" to use as an argument.
+                const element = event.target;
+
+                // if the clicked element was the 'hide' button, meaning it has a class of 'hide'...
+                if (element.className === 'hide') {
+
+                    // before hiding completely, start by changing the animation play state to be running.
+                    element.parentElement.style.animationPlayState = 'running';
+
+                    // event listener to watch for the animation to finish; once it has...
+                    element.parentElement.addEventListener('animationend', () =>  {
+                        
+                        // get rid of that element's parent and fill in the gap (white space).
+                        // important to differentiate child & parent elements.
+                        element.parentElement.remove();
+                    });
+                }
+            });
+
+            // Load next set of posts
+            function load() {
+
+                // Set start and end post numbers, and update counter
+                const start = counter;
+                const end = start + quantity - 1;
+                counter = end + 1;
+
+                // Get new posts and add posts
+                fetch(`/posts?start=${start}&end=${end}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.posts.forEach(add_post);
+                })
+            };
+
+
+            // FUNCTION: (NEW)
+            // Add a new post with given contents to DOM
+            function add_post(contents) {
+
+                // Create new post
+
+                // create a div and assign it to variable post
+                const post = document.createElement('div');
+
+                // give it a class name.
+                post.className = 'post';
+
+                // set inner HTML to the contents and then add a button.
+                post.innerHTML = `${contents} <button class="hide">Hide</button>`;
+
+                // Add post to DOM
+                document.querySelector('#posts').append(post);
+            };
+        </script>
+    </head>
+    <body>
+        <div id="posts">
+        </div>
+    </body>
+</html>

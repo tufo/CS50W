@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Webpage</title>
+        <style>
+            .post {
+                background-color: #77dd11;
+                padding: 20px;
+                margin: 10px;
+            }
+
+            body {
+                padding-bottom: 50px;
+            }
+        </style>
+        <script>
+
+            // Start with first post
+            let counter = 1;
+
+            // Load posts 20 at a time
+            const quantity = 20;
+
+            // When DOM loads, render the first 20 posts using the function load(), which is defined below.
+            document.addEventListener('DOMContentLoaded', load);
+            
+            // WATCH for the moment user has scrolled to the bottom.
+            // If scrolled to bottom, trigger the loading of the next 20 posts by callilng the load() function.
+            window.onscroll = () => {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                    load();
+                }
+            };
+
+            // FUNCTION: Load next set of posts
+            function load() {
+
+                // Set start and end post numbers, and update counter
+                const start = counter;
+                const end = start + quantity - 1;
+                counter = end + 1;
+
+                // Get new posts and add posts
+                // initiate the fetch request.
+                // Notice that this is the URL and has "start" & "end" variables.
+                fetch(`/posts?start=${start}&end=${end}`)
+
+                // once response has been received, then convert response to JSON format.
+                .then(response => response.json())
+
+                // wait for "data" to be received.
+                // then, loop over each post and run the add_post() function.
+                .then(data => {
+                    data.posts.forEach(add_post);
+                })
+            };
+
+            // FUNCTION: add post
+            // Add a new post with given contents to DOM
+            function add_post(contents) {
+
+                // Create new post
+                // creates a new div.
+                const post = document.createElement('div');
+
+                post.className = 'post';
+
+                // populates 
+                post.innerHTML = contents;
+
+                // Add post to DOM
+                document.querySelector('#posts').append(post);
+            };
+        </script>
+    </head>
+    <body>
+        <div id="posts">
+            <!-- this is initially going to be empty -->
+        </div>
+    </body>
+</html>
