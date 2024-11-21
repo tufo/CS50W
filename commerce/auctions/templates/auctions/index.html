@@ -3,5 +3,44 @@
 {% block body %}
     <h2>Active Listings</h2>
 
-    TODO
+
+    <div>
+        1) clicking the link needs to append the id number to the url.<br>
+        2) use the url as a means for other webpages to grab the id and pull the information.<br>
+        <br>
+    </div>
+
+    
+    <div>
+        {% for listing in listings %}
+        <br>
+
+        <div>
+            <h2>Title: {{ listing.title }}</h2>
+            <a href="{% url 'listing' listing_id=listing.id %}">
+                Click here to expand the listing.
+            </a>
+        </div>
+        <div>
+            Listing ID Number: {{ listing.id }}
+        </div>        
+        <div>
+            <a href="{% url 'listing' listing_id=listing.id %}">
+                <img src="{{ listing.imageURL }}" alt="imgURL" style="max-width:500px">
+            </a>
+        </div>        
+        <div>
+            Starting Bid: {{ listing.starting_bid }}
+            <br>
+            Current Price: {{ listing.current_price }}
+        </div>
+        <div>
+            Description: {{ listing.description }}
+            <br>
+            this listing was created on {{ listing.created }}
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+
 {% endblock %}

@@ -1,0 +1,51 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Listing</h2>
+    
+    <div>
+        <h3>Title: {{ listing.title }}</h3>
+        <br>
+        Listing ID Number: {{ listing.id }}
+    </div>
+    <div>
+        Description: {{ listing.description }}
+    </div>
+    <div>
+        Price: {{ listing.starting_bid }}
+    </div>
+    <div>
+        Image URL: {{ listing.imageURL }}
+        <br>
+        <img src="{{ listing.imageURL }}" atl="imgURL" style="max-width:500px">
+    </div>
+
+    <a href="{% url 'watchlist' %}">
+        Add to watchlist
+    </a>
+    <br><br>
+    if user is signed in...
+    <br>
+    bid on item
+
+    <form>
+        <input type="number" placeholder="Enter Bid" name=placeBid>
+        <br>
+        <br>
+        <input type="submit" value="Place Bid">
+    </form>
+
+    <br>
+
+    if the user owns the listing:
+    close auction
+    
+    <br>
+
+    Indicate if auction is active or closed.
+    
+    <br>
+
+    Add comments
+
+{% endblock %}
