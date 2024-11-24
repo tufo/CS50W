@@ -14,30 +14,29 @@
     <div>
         {% for listing in listings %}
         <br>
-
-        <div>
-            <h2>Title: {{ listing.title }}</h2>
-            <a href="{% url 'listing' listing_id=listing.id %}">
-                Click here to expand the listing.
-            </a>
-        </div>
-        <div>
-            Listing ID Number: {{ listing.id }}
-        </div>        
-        <div>
-            <a href="{% url 'listing' listing_id=listing.id %}">
-                <img src="{{ listing.imageURL }}" alt="imgURL" style="max-width:500px">
-            </a>
-        </div>        
-        <div>
-            Starting Bid: {{ listing.starting_bid }}
-            <br>
-            Current Price: {{ listing.current_price }}
-        </div>
-        <div>
-            Description: {{ listing.description }}
-            <br>
-            this listing was created on {{ listing.created }}
+        <div class="w3-card-4 center" style="width: 100%; min-width: 350px; max-width: 500px;">
+            <div>
+                <h2>{{ listing.title }}</h2>
+                <a href="{% url 'listing' listing_id=listing.id %}">
+                    Click here to expand the listing.
+                </a>
+                <br>
+                Listing ID Number: {{ listing.id }}
+                <br>
+                Category: {{ listing.category }}
+                <br>
+                Starting Bid: {{ listing.starting_bid }}
+                <br>
+                Current Price: {{ listing.current_price }}
+                <br>
+                Description: {{ listing.description }}
+                <br>
+                <a href="{% url 'listing' listing_id=listing.id %}">
+                    <img src="{{ listing.imageURL }}" alt="imgURL" style="max-width:500px">
+                </a>
+                <br>
+                this listing was created on {{ listing.created }}
+            </div>
         </div>
         <br>
         {% endfor %}

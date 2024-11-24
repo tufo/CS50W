@@ -1,12 +1,52 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Active Listings</h2>
-
-    TODO
+    <h2>My Watchlist</h2>
+   
     <div>
-        Title
+        {% for watchlistEntry in watchlist %}
+        <br>
+        <div class="w3-card-4 center" style="width: 100%; min-width: 350px; max-width: 500px;">
+            <div>
+                <h2>{{ watchlistEntry.listingId.title }}</h2>
+                <a href="{% url 'listing' listing_id=watchlistEntry.listingId.id %}">
+                    Click here to expand the listing.
+                </a>
+                <br>
+                Listing ID Number: {{ watchlistEntry.listingId.id }}
+                <br>
+                Category: {{ watchlistEntry.listingId.category }}
+                <br>
+                Starting Bid: {{ watchlistEntry.listingId.starting_bid }}
+                <br>
+                Current Price: {{ watchlistEntry.listingId.current_price }}
+                <br>
+                Description: {{ watchlistEntry.listingId.description }}
+                <br>
+                <a href="{% url 'listing' listing_id=watchlistEntry.listingId.id %}">
+                    <img src="{{ watchlistEntry.listingId.imageURL }}" alt="imgURL" style="max-width:500px">
+                </a>
+                <br>
+                this listing was created on {{ watchlistEntry.listingId.created }}
+                <br>
+                <form action="{% url 'watchlist' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="watchlistEntry" value={{ watchlistEntry.listingId.id }}>
+                    <input type="submit" class="btn btn-primary" type="submit" value="Remove">                
+                </form>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
     </div>
+
+
+
+
+
+
+
+
 
 
 {% endblock %}

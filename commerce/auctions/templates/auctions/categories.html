@@ -2,10 +2,54 @@
 
 {% block body %}
     <h2>Categories</h2>
+    <br>
 
-    TODO
     <div>
-        Title
+        <ul>
+        {% for category in categories %}
+            <li>
+                <a href="{% url 'categories' category %}">
+                    {{ category }}
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
     </div>
+    
+
+    
+    <div>
+        {% for listingC in listingsInCategory %}
+        <br>
+        <div class="w3-card-4 center" style="width: 100%; min-width: 350px; max-width: 500px;">
+            <div>
+                <h2>{{ listingC.title }}</h2>
+                <a href="{% url 'listing' listing_id=listingC.id %}">
+                    Click here to expand the listing.
+                </a>
+                <br>
+                Listing ID Number: {{ listingC.id }}
+                <br>
+                Category: {{ listingC.category }}
+                <br>
+                Starting Bid: {{ listingC.starting_bid }}
+                <br>
+                Current Price: {{ listingC.current_price }}
+                <br>
+                Description: {{ listingC.description }}
+                <br>
+                <a href="{% url 'listing' listing_id=listingC.id %}">
+                    <img src="{{ listingC.imageURL }}" alt="imgURL" style="max-width:500px">
+                </a>
+                <br>
+                this listing was created on {{ listingC.created }}
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+
+
+
 
 {% endblock %}

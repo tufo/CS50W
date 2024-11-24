@@ -3,6 +3,20 @@
 {% block body %}
     <h2>Create Listing</h2>
 
+
+    <form action="{% url 'create' %}" method="post">
+        {% csrf_token %}
+        
+            {{ form }}
+        
+        <button type="submit">Submit</button>
+    </form>
+
+<br>
+<hr>
+<br>
+
+<h2>Create Listing</h2>
     <form action="{% url 'create' %}" method="post">
 
         {% csrf_token %}
@@ -20,7 +34,7 @@
         <div>
             Enter a product description:
             <br>
-            <textarea name="description" placeholder="product description">
+            <textarea placeholder="product description" name="description">
 
             </textarea>
         </div>
